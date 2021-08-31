@@ -13,14 +13,14 @@ function probability() {
 }
 
 function touchStarted(event) {
-  if (event.target.id === "p5-canvas") {
-    const y = Math.round(mouseY)
-    const x = Math.round(mouseX)
-    forest[y][x] = burning
-  }
+  clicked(event)
 }
 
 function mouseClicked(event) {
+  clicked(event)
+}
+
+function clicked(event) {
   if (event.target.id === "p5-canvas") {
     const y = Math.round(mouseY)
     const x = Math.round(mouseX)

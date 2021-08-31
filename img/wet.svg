@@ -1,0 +1,18 @@
+<svg version="1.1" id="Lag_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 150 150" style="enable-background:new 0 0 150 150;" xml:space="preserve" height="40px" width="40px">
+<style type="text/css">
+	.st0{clip-path:url(#SVGID_2_);fill:none;stroke:#000000;stroke-width:3.238;}
+	.st1{clip-path:url(#SVGID_2_);fill:none;stroke:#1D1D1B;stroke-width:1.637;}
+</style>
+<g>
+	<defs>
+		<rect id="SVGID_1_" x="31.3" y="5.1" width="87.4" height="139.9"/>
+	</defs>
+	<clipPath id="SVGID_2_">
+		<use xlink:href="#SVGID_1_"  style="overflow:visible;"/>
+	</clipPath>
+	<path class="st0" d="M74.9,142.5c26,0,41.3-17.2,41.3-38.6S75.9,10.1,75.9,10.1s-42.1,72.2-42.1,93.6S48.9,142.5,74.9,142.5z"/>
+	<path class="st1" d="M54.4,88.8c0,0-17.6,39.1,19.2,40.1c0,0-13.3-9.8-12.7-26.4c0.6-16.2,1.3-17,1.8-29.5
+		C62.8,72.9,60.7,75.4,54.4,88.8z"/>
+</g>
+</svg>

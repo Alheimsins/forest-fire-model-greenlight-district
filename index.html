@@ -1,148 +1,15 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
   <head>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.0/p5.js"></script>
-    <script src="data.js"></script>
+    <title>Forest fire - Greenlight district</title>
+    <meta charset="utf-8" />
+    <script src="js/p5.min.js"></script>
+    <script src="js/terrain.js"> </script>
     <script>
       let pGrowth = 0.5
     </script>
-    <script src="sketch.js"></script>
-    <style type="text/css">
-      canvas {
-        width: 100% !important;
-        height: calc(100% - 100px) !important;
-      }
-
-      body {
-        margin: 0 auto;
-        font-family: system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji;
-      }
-
-      .full-height {
-        height: 100vh;
-      }
-
-      .no-link {
-        color: black;
-        text-decoration: none;
-      }
-
-      .button-invert:hover {
-        background-color: black;
-        color: white;
-      }
-
-      .column {
-        float: left;
-        padding: 20px;
-        height: 60px;
-        width: 30%;
-        overflow: hidden;
-      }
-
-      .row:after {
-        content: "";
-        display: table;
-        clear: both;
-      }
-
-      .row {
-        display: flex;
-        column-gap: 10px;
-      }
-
-      .footer {
-         position: fixed;
-         left: 0;
-         bottom: 0;
-         height: 100px;
-         width: 100%;
-         background: white;
-      }
-
-      .modal {
-        display: none;
-        position: fixed;
-        z-index: 1;
-        padding-top: 100px;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        overflow: auto;
-        background-color: rgb(0,0,0);
-        background-color: rgba(0,0,0,0.4);
-      }
-
-      .modal-content {
-        background-color: #fefefe;
-        margin: auto;
-        padding: 20px;
-        border: 1px solid #888;
-        width: 80%;
-      }
-
-      .close {
-        color: #aaaaaa;
-        float: right;
-        font-size: 28px;
-        font-weight: bold;
-      }
-
-      .close:hover,
-      .close:focus {
-        color: #000;
-        text-decoration: none;
-        cursor: pointer;
-      }
-
-      .right {
-        float: right !important;
-      }
-
-      .no-border {
-        border: none !important;
-      }
-
-      .relative {
-        position: relative;
-      }
-
-      .inline {
-        display: inline-block;
-      }
-
-      .p-growth {
-        width: 100%;
-      }
-
-      .flex {
-        display: flex
-      }
-
-      .border-text {
-        margin-left: 10px;
-        border: 1px solid black;
-        padding-left: 10px;
-        padding-right: 10px;
-        height: inherit;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-      }
-
-      .bg-black {
-        background-color: black
-      }
-
-      .pointer {
-        cursor: pointer;
-      }
-
-      .crosshair {
-        cursor: crosshair;
-      }
-    </style>
+    <script src="js/forest.js"></script>
+    <link rel="stylesheet" href="css/style.css"></link>
   </head>
   <body>
     <div id="myCanvas" class="full-height bg-black crosshair"></div>
@@ -151,44 +18,51 @@
 
       <div class="row">
 
-        <div class="column">
+        <div class="column shrink">
           <div style="display: flex; height: inherit">
-            <div class="border-text">Start skogbrann ved høyreklikk i kartet</div>
-            <div class="border-text pointer button-invert" onClick="window.location.reload()">Restart</div>
+            <div class="border-text">
+              Start skogbrann ved å klikke i kartet
+            </div>
+            <div class="border-text pointer button-invert" onClick="window.location.reload()">
+              Restart
+            </div>
           </div>
         </div>
 
-        <div class="column">
-          <div class="relative">
-            <div class="inline relative">
-              <img src="./wet.svg" />
+        <div class="column grow" style="min-width: 350px;">
+          <div class="flex">
+            <div class="flex-column">
+              <img src="./img/wet.svg" />
             </div>
-            <div class="inline relative right">
-              <img src="./fire.svg" />
-            </div>
-          </div>
 
-          <input id="pGrowth" type="range" min="0" max="1" step="0.01" class="p-growth" />
+            <div class="flex-column grow">
+              <input id="pGrowth" type="range" min="0" max="1" step="0.01" class="p-growth" />
 
-          <div class="relative">
-            <div class="relative inline">
-              Våt sesong
+              <div class="relative">
+                <div class="relative inline">
+                  Våt sesong
+                </div>
+                <div class="relative inline right">
+                  Tørr sesong
+                </div>
+              </div>
             </div>
-            <div class="relative inline right">
-              Tørr sesong
+
+            <div class="flex-column">
+              <img src="./img/fire.svg" />
             </div>
           </div>
 
         </div>
         
-        <div class="column">
+        <div class="column shrink">
           <a class="button-invert border-text pointer right" id="myBtn">
             Klikk for mer info
           </a>
         </div>
 
         <!-- <div class="column"> -->
-        <!--   <img src="./scale.png"> -->
+        <!--   <img src="./img/scale.png"> -->
         <!-- </div> -->
       </div>
     </div>
@@ -233,7 +107,7 @@
 
       window.onclick = window.ontouchstart = function(event) {
         if (event.target == modal) {
-          modal.style.display = "none";
+          modal.style.display = "none"
         }
       }
     </script>
