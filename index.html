@@ -1,114 +1,123 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>Forest fire - Greenlight district</title>
-    <meta charset="utf-8" />
-    <script src="js/p5.min.js"></script>
-    <script src="js/terrain.js"> </script>
-    <script>
-      let pGrowth = 0.5
-    </script>
-    <script src="js/forest.js"></script>
-    <link rel="stylesheet" href="css/style.css"></link>
-  </head>
-  <body>
-    <div id="myCanvas" class="full-height bg-black crosshair"></div>
 
-    <div class="footer">
+<head>
+  <title>Forest fire - Greenlight district</title>
+  <meta charset="utf-8" />
+  <script src="js/p5.min.js"></script>
+  <script src="js/terrain.js"> </script>
+  <script>
+    let pGrowth = 0.5
+  </script>
+  <script src="js/forest.js"></script>
+  <link rel="stylesheet" href="css/style.css">
+  </link>
+</head>
 
-      <div class="row">
+<body>
+  <div id="myCanvas" class="full-height bg-black crosshair"></div>
 
-        <div class="column shrink">
-          <div style="display: flex; height: inherit">
-            <div class="border-text">
-              Start skogbrann ved å klikke i kartet
-            </div>
-            <div class="border-text pointer button-invert" onClick="window.location.reload()">
-              Restart
-            </div>
+  <div class="footer">
+
+    <div class="row">
+
+      <div class="column shrink">
+        <div style="display: flex; height: inherit">
+          <div class="border-text">
+            Start skogbrann ved å klikke i kartet
+          </div>
+          <div class="border-text pointer button-invert" onClick="window.location.reload()">
+            Restart
           </div>
         </div>
+      </div>
 
-        <div class="column grow" style="min-width: 350px;">
-          <div class="flex">
-            <div class="flex-column">
-              <img src="./img/wet.svg" />
-            </div>
+      <div class="column grow" style="min-width: 350px; margin-top: 5px;">
+        <div class="flex">
+          <div class="flex-column">
+            <img src="./img/wet.svg" />
+          </div>
 
-            <div class="flex-column grow">
-              <input id="pGrowth" type="range" min="0" max="1" step="0.01" class="p-growth" />
+          <div class="flex-column grow">
+            <input id="pGrowth" type="range" min="0" max="1" step="0.01" class="p-growth" />
 
-              <div class="relative">
-                <div class="relative inline">
-                  Våt sesong
-                </div>
-                <div class="relative inline right">
-                  Tørr sesong
-                </div>
+            <div class="relative">
+              <div class="relative inline">
+                Våt sesong
+              </div>
+              <div class="relative inline right">
+                Tørr sesong
               </div>
             </div>
-
-            <div class="flex-column">
-              <img src="./img/fire.svg" />
-            </div>
           </div>
 
-        </div>
-        
-        <div class="column shrink">
-          <a class="button-invert border-text pointer right" id="myBtn">
-            Klikk for mer info
-          </a>
+          <div class="flex-column">
+            <img src="./img/fire.svg" />
+          </div>
         </div>
 
-        <!-- <div class="column"> -->
-        <!--   <img src="./img/scale.png"> -->
-        <!-- </div> -->
       </div>
-    </div>
 
-    <div id="myModal" class="modal">
-      <div class="modal-content">
-        <span class="close">&times;</span>
-         <h2>Forest fire</h2>
-         <p>
-          <p>
-            Dette er en implementering av FOREST-FIRE modellen i området Gromsthul. Projeksjonen viser grønne celler som trær, de brune cellene som tomme mellomrom og de svarte cellene som trær som brenner. Trykk på kartet for at starte en brann. Når et tre brenner, vil det dø og spre ilden til trær i nabolaget i neste trinn. For et gitt trinn er P sannsynligheten for at et tre sprer ilden til naboene.
-          </p>
-
-          <p>
-            Bruk glidebryteren til å kontrollere om brannen starter i en tørr eller våt sesong med forskjellige sannsynligheter for spredning. Modellen er implementert med information om skogbrannsrisiko fra NSB.Kart.no. Kartet strekker sig over Vestmarka med Norsjø i vest, Hoppestadelva i øst og i Gromsthulskogen i sentrum.
-          </p>
-        </p>
+      <div class="column shrink">
+        <a class="button-invert border-text pointer right" id="myBtn">
+          Klikk for mer info
+        </a>
       </div>
-    </div>
-  </body>
 
-    <script>
-    const pGrowthSlider = document.getElementById("pGrowth")
-    if (pGrowthSlider) {
-      pGrowthSlider.value = pGrowth
-      pGrowthSlider.onchange = function() {
-        pGrowth = parseFloat(pGrowthSlider.value)
-      }
+      <!-- <div class="column"> -->
+      <!--   <img src="./img/scale.png"> -->
+      <!-- </div> -->
+    </div>
+  </div>
+
+  <div id="myModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Forest fire</h2>
+      <p>
+      <p>
+        Dette er en implementering av FOREST-FIRE modellen i området Gromsthul. Projeksjonen viser grønne celler som
+        trær, de brune cellene som tomme mellomrom og de svarte cellene som trær som brenner. Trykk på kartet for at
+        starte en brann. Når et tre brenner, vil det dø og spre ilden til trær i nabolaget i neste trinn. For et gitt
+        trinn er P sannsynligheten for at et tre sprer ilden til naboene.
+      </p>
+
+      <p>
+        Bruk glidebryteren til å kontrollere om brannen starter i en tørr eller våt sesong med forskjellige
+        sannsynligheter for spredning. Modellen er implementert med information om skogbrannsrisiko fra NSB.Kart.no.
+        Kartet strekker sig over Vestmarka med Norsjø i vest, Hoppestadelva i øst og i Gromsthulskogen i sentrum.
+      </p>
+      </p>
+    </div>
+  </div>
+</body>
+
+<script>
+  const pGrowthSlider = document.getElementById("pGrowth")
+  if (pGrowthSlider) {
+    pGrowthSlider.value = pGrowth
+    pGrowthSlider.onchange = function () {
+      pGrowth = parseFloat(pGrowthSlider.value)
     }
+  }
 
-      const modal = document.getElementById("myModal")
-      const btn = document.getElementById("myBtn")
-      const span = document.getElementsByClassName("close")[0]
+  const modal = document.getElementById("myModal")
+  const btn = document.getElementById("myBtn")
+  const span = document.getElementsByClassName("close")[0]
 
-      btn.onclick = btn.ontouchstart = function() {
-        modal.style.display = "block"
-      }
+  btn.onclick = btn.ontouchstart = function () {
+    modal.style.display = "block"
+  }
 
-      span.onclick = span.ontouchstart = function() {
-        modal.style.display = "none"
-      }
+  span.onclick = span.ontouchstart = function () {
+    modal.style.display = "none"
+  }
 
-      window.onclick = window.ontouchstart = function(event) {
-        if (event.target == modal) {
-          modal.style.display = "none"
-        }
-      }
-    </script>
+  window.onclick = window.ontouchstart = function (event) {
+    if (event.target == modal) {
+      modal.style.display = "none"
+    }
+  }
+</script>
+
 </html>

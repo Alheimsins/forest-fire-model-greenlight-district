@@ -49,6 +49,7 @@ body {
 
 .footer {
    position: fixed;
+   opacity: 0.8;
    left: 0;
    bottom: 0;
    height: 100px;
@@ -113,7 +114,7 @@ body {
 }
 
 .flex {
-  display: flex
+  display: flex;
 }
 
 .flex-column {
@@ -133,7 +134,7 @@ body {
 }
 
 .bg-black {
-  background-color: black
+  background-color: black;
 }
 
 .pointer {
@@ -142,4 +143,27 @@ body {
 
 .crosshair {
   cursor: crosshair;
+}
+
+input[type=range]{
+  -webkit-appearance: none;
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+  width: 300px;
+  height: 5px;
+  background: #ddd;
+  border: none;
+  border-radius: 3px;
+}
+
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  border: none;
+  height: 16px;
+  width: 16px;
+  cursor: pointer;
+  border-radius: 50%;
+  background: black;
+  margin-top: -4px;
 }
