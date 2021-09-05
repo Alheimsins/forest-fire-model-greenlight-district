@@ -1,12 +1,15 @@
-const ground = 0
-const tree = 1
-const burning = -1
-const burned = -2
+const GROUND = 0
+const TREE = 1
+const BURNING = -1
+const BURNED = -2
 
-let groundColor, treeColor, burnedColor, burningColor
+p5.disableFriendlyErrors = true
+
+let GROUND_COLOR, TREE_COLOR, BURNED_COLOR, BURNING_COLOR
+
 let forest, canvas
-
-const value = 0
+let burningTrees = []
+let burnedTrees = []
 
 function probability() {
   return !!pGrowth && Math.random() <= pGrowth
@@ -21,10 +24,10 @@ function mouseClicked(event) {
 }
 
 function clicked(event) {
-  if (event.target.id === "p5-canvas") {
+  if (event.target.id === "terrain") {
     const y = Math.round(mouseY)
     const x = Math.round(mouseX)
-    forest[y][x] = burning
+    burningTrees.push({x, y})
   }
 }
 
@@ -35,79 +38,75 @@ function preload() {
 function setup() {
   canvas = createCanvas(800, 600)
   canvas.parent("myCanvas")
-  canvas.id("p5-canvas")
+  canvas.id("terrain")
+
   // if the animation runs slow uncomment
   // frameRate(30)
-  setInterval(ashes, 500)
+
+  setInterval(burned, 300)
 
   // our colors for different terrain
-  groundColor = color(65, 35, 0)
-  treeColor = color(60, 150, 50)
-  burnedColor = color(0, 0, 0)
-  burningColor = color(207, 128, 0)
-}
+  GROUND_COLOR = color(65, 35, 0)
+  TREE_COLOR = color(66, 168, 128)
+  BURNED_COLOR = color(0, 0, 0)
+  BURNING_COLOR = color(207, 128, 0)
 
-function ashes() {
-  for (let y = 0; y < height; y++) {
-    for (let x = 0; x < width; x++) {
-      if (forest[y][x] === burning) forest[y][x] = burned
-    }
-  }
+  forest.forEach((row, y) =>
+    row.forEach((_, x) => {
+      // draw the terrain
+      const state = forest[y][x] === GROUND ? GROUND_COLOR : TREE_COLOR
+      set(x, y, state)
+    })
+  )
+  updatePixels()
 }
 
 function draw() {
-  // go through all the values in our forest...
-  loadPixels()
-  for (let y = 0; y < height; y++) {
-    for (let x = 0; x < width; x++) {
-
-      // update the burn
-      burn(x, y)
-
-      // draw the forest
-      const value = forest[y][x]
-      if (value === ground) {
-        set(x, y, groundColor)
-      }
-      else if (value === tree) {
-        set(x, y, treeColor)
-      }
-      else if (value === burning) {
-        set(x, y, burningColor)
-      }
-      else if (value === burned) {
-        set(x, y, burnedColor)
-      }
+  burningTrees.forEach(({x, y}, index, object) => {
+    burn(x, y)
+    if (forest[y][x] === BURNING) {
+      set(x, y, BURNING_COLOR)
+      burnedTrees.push({x, y})
     }
+    object.splice(index, 1)
+  })
 
-    updatePixels()
+  updatePixels()
+
+  // uncomment to display frame rate
+  // fill('black'); rect(40, 10, 265, 55); fill('red'); textSize(40); text('frame rate: ' + round(frameRate()), 50, 50);
+}
+
+function burn(x, y) {
+  // neighbor to the left
+  if (x - 1 >= 0 && forest[y][x - 1] === TREE && probability()) {
+    forest[y][x - 1] = BURNING
+    burningTrees.push({x: x - 1, y})
   }
 
-  function burn(x, y) {
-    // if already not burned yet, skip
-    // (since it's not on fire!)
-    if (forest[y][x] != burning && forest[y][x] != burned) return
-
-    // otherwise, burn this pixel's neighbors...
-
-    // neighbor to the left
-    if (x - 1 >= 0 && forest[y][x - 1] === tree) {
-      forest[y][x - 1] = probability() ? burning : tree
-    }
-
-    // right
-    if (x + 1 < width && forest[y][x + 1] === tree) {
-      forest[y][x + 1] = probability() ? burning : tree
-    }
-
-    // up
-    if (y - 1 >= 0 && forest[y - 1][x] === tree) {
-      forest[y - 1][x] = probability() ? burning : tree
-    }
-
-    // down
-    if (y + 1 < height && forest[y + 1][x] === tree) {
-      forest[y + 1][x] = probability() ? burning : tree
-    }
+  // right
+  if (x + 1 < width && forest[y][x + 1] === TREE && probability()) {
+    forest[y][x + 1] = BURNING
+    burningTrees.push({x: x + 1, y})
   }
+
+  // up
+  if (y - 1 >= 0 && forest[y - 1][x] === TREE && probability()) {
+    forest[y - 1][x] = BURNING
+    burningTrees.push({x, y: y - 1})
+  }
+
+  // down
+  if (y + 1 < height && forest[y + 1][x] === TREE && probability()) {
+    forest[y + 1][x] = BURNING
+    burningTrees.push({x, y: y + 1})
+  }
+}
+
+function burned() {
+  burnedTrees.forEach(({x, y}, index, object) => {
+    forest[y][x] = BURNED
+    set(x, y, BURNED_COLOR)
+    object.splice(index, 1)
+  })
 }
