@@ -4,10 +4,17 @@
 <head>
   <title>Forest fire - Greenlight district</title>
   <meta charset="utf-8" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
   <script src="js/p5.min.js"></script>
   <script src="js/terrain.js"> </script>
   <script>
-    let pGrowth = 0.9
+    let pGrowth = 1
   </script>
   <script src="js/forest.js"></script>
   <link rel="stylesheet" href="css/style.css">
@@ -76,16 +83,21 @@
       <h2>Forest fire</h2>
       <p>
       <p>
-        Dette er en implementering av FOREST-FIRE modellen i området Gromsthul. Projeksjonen viser grønne celler som
-        trær, de brune cellene som tomme mellomrom og de svarte cellene som trær som brenner. Trykk på kartet for at
-        starte en brann. Når et tre brenner, vil det dø og spre ilden til trær i nabolaget i neste trinn. For et gitt
-        trinn er P sannsynligheten for at et tre sprer ilden til naboene.
+        Dette er en implementering av FOREST-FIRE modellen i Gromstul. Projeksjonen viser grønne felt som trær, brune
+        felt som åpne mellomrom og svarte felt som utbrent skog.
+      </p>
+      <p>
+        Plassér pekeren et sted på kartet, og klikk for å starte en brann. Når et tre brenner kan ilden spre seg videre
+        til trær i nærheten.
       </p>
 
       <p>
-        Bruk glidebryteren til å kontrollere om brannen starter i en tørr eller våt sesong med forskjellige
-        sannsynligheter for spredning. Modellen er implementert med information om skogbrannsrisiko fra NSB.Kart.no.
-        Kartet strekker sig over Vestmarka med Norsjø i vest, Hoppestadelva i øst og i Gromsthulskogen i sentrum.
+        For å kontrollere om brannen starter i en tørr eller våt sesong, kan man justere på skalaen lengst ned på
+        bildet. Dette gir ulike sannsynligheter for spredning.
+      </p>
+      <p>
+        Modellen bruker data om skogbrannsrisiko fra DSB.KART.no (Direktoratet for samfunnssikkerhet og beredskap).
+        På kartet sees Norsjø i vest, Hoppestadelva i øst og i Gromstulskogen i sentrum.
       </p>
       </p>
     </div>
