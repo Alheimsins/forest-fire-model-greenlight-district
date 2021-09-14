@@ -1,3 +1,5 @@
 # forest-fire-model-greenlight-district
 
-https://greenlightdistrict.no/bio/sidsel-bonde/
+Demo: https://wildfire.vercel.app/
+
+About: https://greenlightdistrict.no/bio/sidsel-bonde/
